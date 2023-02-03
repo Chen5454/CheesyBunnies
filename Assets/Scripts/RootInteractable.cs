@@ -6,16 +6,14 @@ public class RootInteractable : MonoBehaviour
     RootMovement _rootMovement;
     public CameraFollow CameraFollow;
 
-	private Collider2D _collider;
-
 	[SerializeField] private int _points;
 	[SerializeField] private bool _isHazard;
-
+	bool _canGiveNutrient = true;
 
 
 	private void Awake()
 	{
-		_collider = GetComponent<Collider2D>();
+		_canGiveNutrient = true;
 	}
 
 
@@ -37,13 +35,14 @@ public class RootInteractable : MonoBehaviour
 			else
 			{
 				//gives points to the carrot or something
-				GameState.Instance.TouchedResource(_points);
+				if (_canGiveNutrient)
+				{
+					_canGiveNutrient = false;
+					GameState.Instance.TouchedResource(_points);
+				}
 			}
 
             GameState.Instance.ChangeGameState(GameStates.CarrotView);
-			_collider.enabled = false;
-
-
 
 		}
     }

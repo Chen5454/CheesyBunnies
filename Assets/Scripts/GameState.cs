@@ -273,9 +273,9 @@ public class CarrotVisual
 	}
 }
 
-
 public enum GameStates
 {
 	CarrotView,
-	RootView//can go to carrot view only when touching water, finished max length, or touching hazard
+	RootView,//can go to carrot view only when touching water, finished max length, or touching hazard
+	MainMenu
 }
