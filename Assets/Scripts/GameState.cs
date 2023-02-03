@@ -184,6 +184,7 @@ public class GameState : MonoBehaviour
 		float startAngle = randomSpawn.SpawnDirection;
 		Vector2 spawnPos = randomSpawn.transform.position;
 
+		randomSpawn.OnSpawnNewObject(startAngle);
 		RootMovement newRoot = Instantiate(_rootPF, spawnPos, Quaternion.identity ,_parent).GetComponent<RootMovement>();
 		newRoot.SetInitialAngle(startAngle);
 		_currentRoot = newRoot;

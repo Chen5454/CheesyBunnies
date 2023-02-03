@@ -17,6 +17,8 @@ public class RootMovement : MonoBehaviour
     public CameraFollow CameraFollow;
     [SerializeField]private float totalLength = 0f;//serialized for debug
     [SerializeField] Text totalTxt;
+
+	[SerializeField] private Transform tipTrans;
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -36,7 +38,11 @@ public class RootMovement : MonoBehaviour
         transform.position += direction * Time.deltaTime * speed;
         totalLength -= Vector3.Distance(lastPosition, transform.position);
 
-        float threshold = 0.1f;
+		tipTrans.rotation = Quaternion.Euler(0,0,(angle * Mathf.Rad2Deg) - 180);
+
+
+
+		float threshold = 0.1f;
         if (Vector3.Distance(transform.position, lineRenderer.GetPosition(0)) < threshold)
         {
             isAtStartPoint = true;
