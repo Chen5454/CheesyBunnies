@@ -24,10 +24,12 @@ public class RootInteractable : MonoBehaviour
         {
             _root = other.gameObject;
             _rootMovement = _root.GetComponent<RootMovement>();
+			_rootMovement.RootFillImage.fillAmount = 1;
             _rootMovement.enabled = false;
+
             //  CameraFollow.FollowLineReverse();
 
-			if(_isHazard)
+            if (_isHazard)
 			{
 				//destroys root or something
 				GameState.Instance.TouchedHazard();

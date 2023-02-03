@@ -15,20 +15,34 @@ public class RootMovement : MonoBehaviour
     public bool isAtStartPoint;
     public float maxLength;
     public CameraFollow CameraFollow;
-    [SerializeField]private float totalLength = 0f;//serialized for debug
+    [SerializeField] public float totalLength = 0f;//serialized for debug
     [SerializeField] Text totalTxt;
+    [SerializeField] public Image RootFillImage;
+    
 
 	[SerializeField] private Transform tipTrans;
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        RootFillImage = GameState.Instance.RootFillImage;
         //totalLength = maxLength;
     }
 
     private void Update()
     {
         float rotationSpeed = Input.GetAxis("Horizontal") * Time.deltaTime;
-        angle -= rotationSpeed;
+
+        if (UIManager.Instance.isInvert)
+        {
+            angle -= rotationSpeed;
+
+        }
+        else
+        {
+            angle += rotationSpeed;
+
+        }
+
         direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 
         lineRenderer.SetVertexCount(++numberOfPoints);
@@ -73,6 +87,8 @@ public class RootMovement : MonoBehaviour
         }
         if(totalTxt != null)
         totalTxt.text = Convert.ToInt32(totalLength).ToString();
+
+        RootFillImage.fillAmount= totalLength/maxLength;
     }
 	public void AddTotalLength(float length) => totalLength += (length + maxLength);
 	public void AddLength(float length) => totalLength += length;
