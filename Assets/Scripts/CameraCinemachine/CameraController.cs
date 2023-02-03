@@ -34,7 +34,10 @@ public class CameraController : MonoBehaviour
 			ChangeCamera(1);
 		}
 	}
-	
+	/// <summary>
+	/// 0 = carrot camera, 1 = root camera
+	/// </summary>
+	/// <param name="index"></param>
 	public void ChangeCamera(int index)
 	{
 		cameraCurrentIndex = index;
