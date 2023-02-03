@@ -14,7 +14,9 @@ public class Objectesting : MonoBehaviour
             _root = other.gameObject;
             _rootMovement = _root.GetComponent<RootMovement>();
             _rootMovement.enabled = false;
-            CameraFollow.FollowLineReverse();
+            //  CameraFollow.FollowLineReverse();
+            GameState.Instance.ChangeGameState(GameStates.CarrotView);
+
         }
     }
 

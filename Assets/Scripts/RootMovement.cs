@@ -68,7 +68,7 @@ public class RootMovement : MonoBehaviour
             direction = -direction;
             totalLength = maxLength;
             enabled= false;
-            CameraController.Instance.ChangeCamera(0);
+            GameState.Instance.ChangeGameState(GameStates.CarrotView);
         }
         totalTxt.text = Convert.ToInt32(totalLength).ToString();
     }
