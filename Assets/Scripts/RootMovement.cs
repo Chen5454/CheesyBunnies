@@ -66,7 +66,10 @@ public class RootMovement : MonoBehaviour
             direction = -direction;
             totalLength = maxLength;
             enabled= false;
-            GameState.Instance.ChangeGameState(GameStates.CarrotView);
+            if (GameState.Instance)
+            {
+                GameState.Instance.ChangeGameState(GameStates.CarrotView);
+            }
         }
         if(totalTxt != null)
         totalTxt.text = Convert.ToInt32(totalLength).ToString();
