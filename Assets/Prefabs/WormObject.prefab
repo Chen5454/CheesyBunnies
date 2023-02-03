@@ -145,7 +145,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!1 &1101737280
 GameObject:
@@ -518,5 +518,4 @@ MonoBehaviour:
   rotationSpeed: 100
   size: 10
   frequency: 0.5
-  detectHeader: 3.45
   wormColliderPrefab: {fileID: 1101737280}

@@ -22,6 +22,7 @@ public class WormMove : MonoBehaviour
         // Recieve header distance from header object.
         detectHeader = transform.GetChild(0).localPosition.x;
         trailRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
+        trailRenderer.useWorldSpace = true;
         lineRenderer = transform.GetComponent<LineRenderer>();
         lineRenderer.useWorldSpace = true;
         lineRenderer.positionCount = size;
@@ -32,7 +33,7 @@ public class WormMove : MonoBehaviour
         trail_positions = new Vector3[size * 3];
         worm_positions = new Vector3[size];
 
-        worm_positions[0] = transform.position;
+        worm_positions[0] = trail_positions[0] = trail_positions[size] = trail_positions[size*2] = transform.position;
         for (int i = 1; i < size; i++)
         {
             worm_positions[i] = worm_positions[i - 1] + Vector3.right;
@@ -42,6 +43,7 @@ public class WormMove : MonoBehaviour
             wormColliders[i] = collider;
         }
         lineRenderer.SetPositions(worm_positions);
+        trailRenderer.SetPositions(trail_positions);
     }
 
     float regular_movement()
