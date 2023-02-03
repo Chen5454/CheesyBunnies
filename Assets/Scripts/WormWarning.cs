@@ -15,6 +15,7 @@ public class WormWarning : MonoBehaviour
         Debug.Log(collision.name);
         if(collision.name!="Root")
             WormScript.DetectItem();
+        WormScript.DetectItem();
     }
 
 }

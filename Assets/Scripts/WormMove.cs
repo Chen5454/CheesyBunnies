@@ -41,6 +41,12 @@ public class WormMove : MonoBehaviour
         }
         lineRenderer.SetPositions(worm_positions);
 
+        lineRenderer=transform.GetComponent<LineRenderer>();
+        lineRenderer.positionCount=size;
+        worm_positions = new Vector3[size];
+        for (int i = 1; i < size; i++)
+            worm_positions[i] = worm_positions[i - 1] + Vector3.right;
+        lineRenderer.SetPositions(worm_positions);
     }
     float regular_movement()
     {
@@ -75,12 +81,11 @@ public class WormMove : MonoBehaviour
             wormColliders[i].transform.position = worm_positions[i];
             trail_positions[i + size*2] = worm_positions[i];
         }
-        for (int i = size*2+1; i > -1; i--)
-            trail_positions[i] = Vector3.Lerp(trail_positions[i], trail_positions[i + 1], Time.deltaTime * speed);
-
-
-
-            trailRenderer.SetPositions(trail_positions);
         lineRenderer.SetPositions(worm_positions);
+
+        for (int i = size*2+1; i > -1; i--) { 
+            trail_positions[i] = Vector3.Lerp(trail_positions[i], trail_positions[i + 1], Time.deltaTime * speed);
+            trailRenderer.SetPositions(trail_positions);
+        }
     }
 }
