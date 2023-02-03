@@ -9,6 +9,17 @@ public class GameState : MonoBehaviour
 	bool _isPausing;
 
 
+	[Header("Root Spawn")]
+	[SerializeField] private GameObject _rootPF;
+	[SerializeField] private Transform _spawnPos;
+	[SerializeField] private Transform _parent;
+
+	//serialized for debugging
+	[SerializeField] private RootMovement _currentRoot;
+
+
+
+
 	private void Awake()
 	{
 		if (_instance == null)
@@ -32,6 +43,7 @@ public class GameState : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
 			{
 				ChangeGameState(GameStates.RootView);
+				InstantiateNewRoot();
 			}
 
 
@@ -54,6 +66,9 @@ public class GameState : MonoBehaviour
 		//	//option to click on certain button to unpause
 		//}
 	}
+
+
+
 
 
 	public void ChangeGameState(GameStates state)
@@ -150,6 +165,19 @@ public class GameState : MonoBehaviour
 	}
 
 	#endregion
+
+
+	#region Root management
+	void InstantiateNewRoot()
+	{
+		RootMovement newRoot = Instantiate(_rootPF, _spawnPos.position, Quaternion.identity ,_parent).GetComponent<RootMovement>();
+		_currentRoot = newRoot;
+		CameraController.Instance.SetNewRootCameraFollow(_currentRoot.transform);
+	}
+
+
+	#endregion
+
 }
 
 public enum GameStates
