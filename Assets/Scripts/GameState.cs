@@ -14,7 +14,7 @@ public class GameState : MonoBehaviour
     public Toggle invertToggle;
     public bool isInvert;
 
-
+	public GameObject PlayButton;
     [Header("Carrot Settings")]
 	//references
 	[SerializeField] private SpriteRenderer _carrotRenderer;
@@ -146,9 +146,9 @@ public class GameState : MonoBehaviour
 	{
 		
 	}
-	#endregion
-	#region  menus
-	void EnterPauseMenu()
+    #endregion
+    #region  menus
+    public void EnterPauseMenu()
 	{
         SettingsMenu.SetActive(true);
 
@@ -167,6 +167,12 @@ public class GameState : MonoBehaviour
     {
         Debug.Log("Bye");
         Application.Quit();
+    }
+
+	public void StartGame()
+	{
+        Time.timeScale = 1;
+
     }
     public void MainMenuButton()
 	{
@@ -202,11 +208,7 @@ public class GameState : MonoBehaviour
 
 		}
 	}
-	public void StartNewGame()
-	{
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-    }
     #endregion
 
     #region Root management

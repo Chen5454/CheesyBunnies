@@ -14,7 +14,7 @@ public class RootMovement : MonoBehaviour
     public float speed;
     public bool isAtStartPoint;
     public float maxLength;
-    public CameraFollow CameraFollow;
+    //public CameraFollow CameraFollow;
     [SerializeField] public float totalLength = 0f;//serialized for debug
     [SerializeField] Text totalTxt;
     [SerializeField] public Image RootFillImage;
@@ -69,7 +69,7 @@ public class RootMovement : MonoBehaviour
         {
             isAtStartPoint = true;
 
-            CameraFollow.StartFollowingLine();
+          //  CameraFollow.StartFollowingLine();
         }
         else
         {
