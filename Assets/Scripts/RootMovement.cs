@@ -32,7 +32,7 @@ public class RootMovement : MonoBehaviour
     {
         float rotationSpeed = Input.GetAxis("Horizontal") * Time.deltaTime;
 
-        if (UIManager.Instance.isInvert)
+        if (GameState.Instance.isInvert)
         {
             angle -= rotationSpeed;
 

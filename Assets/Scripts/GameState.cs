@@ -4,12 +4,15 @@ using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEditor.Build.Content;
+using System.Threading;
+using UnityEditor.SearchService;
 
 public class GameState : MonoBehaviour
 {
 	private static GameState _instance;
 	public static GameState Instance => _instance;
     public Toggle invertToggle;
+    public bool isInvert;
 
 
     [Header("Carrot Settings")]
@@ -160,7 +163,12 @@ public class GameState : MonoBehaviour
         //if at root view
         //making root to continue moving
     }
-	public void MainMenuButton()
+    public void ExitButton()
+    {
+        Debug.Log("Bye");
+        Application.Quit();
+    }
+    public void MainMenuButton()
 	{
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
     }
@@ -168,12 +176,12 @@ public class GameState : MonoBehaviour
 	{
         if (invertToggle.isOn)
         {
-         UIManager.Instance.isInvert = true;
+         isInvert = true;
 
         }
         else
         {
-            UIManager.Instance.isInvert = false;
+            isInvert = false;
 
         }
     }
@@ -194,11 +202,15 @@ public class GameState : MonoBehaviour
 
 		}
 	}
+	public void StartNewGame()
+	{
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-	#endregion
+    }
+    #endregion
 
-	#region Root management
-	void InstantiateNewRoot()
+    #region Root management
+    void InstantiateNewRoot()
 	{
 	RootSpawn randomSpawn = GetRandomRootSpawn();
 		float startAngle = randomSpawn.SpawnDirection;
