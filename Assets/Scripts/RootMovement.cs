@@ -26,14 +26,6 @@ public class RootMovement : MonoBehaviour
     private void Update()
     {
         float rotationSpeed = Input.GetAxis("Horizontal") * Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            direction = Quaternion.Euler(0, 0, -15) * direction;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            direction = Quaternion.Euler(0, 0, 15) * direction;
-        }
         angle -= rotationSpeed;
         direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 
