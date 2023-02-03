@@ -53,7 +53,6 @@ public class DimensionLayersManager : MonoBehaviour
 	{
 		return _dimensionLayers.Find(x => x.GetDimensionType == type);
 	}
-
 }
 [Serializable]
 public class DimensionLayer
