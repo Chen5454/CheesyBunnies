@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1641422120457121932}
   - component: {fileID: 1641422120457121933}
   m_Layer: 0
-  m_Name: Hazard_Lava
+  m_Name: Hazard_Chemical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
