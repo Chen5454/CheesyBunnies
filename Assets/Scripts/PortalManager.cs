@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class PortalManager : MonoBehaviour
 {
-    public DimensionsType gamestates;
-    private DimensionsType previousGamestate;
+    public DimensionsType dimensionsType;
+    public DimensionsType previousGameType;
+    public DimensionLayer previousGamesLayer;
+
+    private void Update()
+    {
+        previousGamesLayer = DimensionLayersManager.Instance.currentDimenstion;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.CompareTag("Root"))
         {
             Debug.Log("Root Detected");
 
-            if (previousGamestate == 0)
-            {
-                // first time entering, store the current gamestate
-                previousGamestate = gamestates;
-            }
-            else
-            {
-                // change back to previous gamestate
-                gamestates = previousGamestate;
-                previousGamestate = 0;
-            }
 
-            DimensionLayersManager.Instance.ChangeDimension(gamestates);
+            DimensionLayersManager.Instance.ChangeDimension(dimensionsType);
+
+            previousGameType = previousGamesLayer.GetDimensionType;
+
+            DimensionsType temp = dimensionsType;
+            dimensionsType = previousGameType;
+            previousGameType = temp;
         }
     }
 }

@@ -12,8 +12,10 @@ public class DimensionLayersManager : MonoBehaviour
 
 	[SerializeField] private int _backgroundLayerOrder = -100;
 	[SerializeField] private int _upperLayerOrder = -99;
+	//public PortalManager CurrentPortal;
+	public DimensionLayer currentDimenstion;
 
-	private void Awake()
+    private void Awake()
 	{
 		if (_instance == null)
 			_instance = this;
@@ -27,9 +29,9 @@ public class DimensionLayersManager : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.G))
 		{
-			ChangeDimension(DimensionsType.DIMENSION_2);
+           ChangeDimension(DimensionsType.DIMENSION_2);
 		}
-	}
+    }
 
 	public void ChangeDimension(DimensionsType type)
 	{
@@ -47,10 +49,12 @@ public class DimensionLayersManager : MonoBehaviour
 		_previousDimension.SetDimensionActive(false);//disable the first dimension layer
 		_previousDimension.SetLayerOrder(_backgroundLayerOrder);
 		_previousDimension = GetDimension(type);//update the previous dimension to the new dimension
+		currentDimenstion = _previousDimension;
 
-	}
+    }
 	DimensionLayer GetDimension(DimensionsType type)
 	{
+
 		return _dimensionLayers.Find(x => x.GetDimensionType == type);
 	}
 
