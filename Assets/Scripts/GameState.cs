@@ -5,9 +5,27 @@ public class GameState : MonoBehaviour
 	private static GameState _instance;
 	public static GameState Instance => _instance;
 
+
+	[Header("Carrot Settings")]
+
+	[SerializeField] private SpriteRenderer _carrotRenderer;
+
+	[SerializeField] private int _currentPoints;//will effect somehow on the next root
+
+	[SerializeField] private int _hazardtouched;
+
+	[Header("Game State")]
 	[SerializeField] private GameStates _gameCurrentState;
 	bool _isPausing;
 
+
+	[Header("Root Spawn")]
+	[SerializeField] private GameObject _rootPF;
+	[SerializeField] private Transform _spawnPos;
+	[SerializeField] private Transform _parent;
+
+	//serialized for debugging
+	[SerializeField] private RootMovement _currentRoot;
 
 	private void Awake()
 	{
@@ -23,7 +41,6 @@ public class GameState : MonoBehaviour
 		_gameCurrentState = GameStates.CarrotView;
 		EnterState(_gameCurrentState);
 	}
-
 	private void Update()
 	{
 		if (_gameCurrentState == GameStates.CarrotView)
@@ -32,6 +49,7 @@ public class GameState : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
 			{
 				ChangeGameState(GameStates.RootView);
+				InstantiateNewRoot();
 			}
 
 
@@ -55,7 +73,7 @@ public class GameState : MonoBehaviour
 		//}
 	}
 
-
+	#region Game State
 	public void ChangeGameState(GameStates state)
 	{
 		ExitState(_gameCurrentState);
@@ -91,7 +109,7 @@ public class GameState : MonoBehaviour
 				break;
 		}
 	}
-
+	#endregion
 	#region Root View
 	void EnterRootView()
 	{
@@ -150,6 +168,32 @@ public class GameState : MonoBehaviour
 	}
 
 	#endregion
+
+	#region Root management
+	void InstantiateNewRoot()
+	{
+		RootMovement newRoot = Instantiate(_rootPF, _spawnPos.position, Quaternion.identity ,_parent).GetComponent<RootMovement>();
+		_currentRoot = newRoot;
+		_currentRoot.AddTotalLength(_currentPoints);
+		CameraController.Instance.SetNewRootCameraFollow(_currentRoot.transform);
+	}
+
+
+	#endregion
+
+	#region Carrot management
+	public void TouchedHazard()
+	{
+		_hazardtouched++;
+	}
+
+	public void TouchedResource(int points)
+	{
+		_currentPoints += points;
+	}
+
+	#endregion
+
 }
 
 public enum GameStates

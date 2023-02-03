@@ -20,7 +20,7 @@ public class RootMovement : MonoBehaviour
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        totalLength = maxLength;
+        //totalLength = maxLength;
     }
 
     private void Update()
@@ -65,4 +65,5 @@ public class RootMovement : MonoBehaviour
         if(totalTxt != null)
         totalTxt.text = Convert.ToInt32(totalLength).ToString();
     }
+	public void AddTotalLength(int length) => totalLength += (length + maxLength);
 }

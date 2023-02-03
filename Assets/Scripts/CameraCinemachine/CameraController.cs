@@ -46,5 +46,8 @@ public class CameraController : MonoBehaviour
 			_virtualCameraList[i].Priority = i == index ? 1 : 0;
 		}
 	}
-
+	public void SetNewRootCameraFollow(Transform newRootTrans)
+	{
+		_virtualCameraList[1].Follow = newRootTrans;
+	}
 }
