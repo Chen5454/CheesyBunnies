@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6410580101639474887}
   - component: {fileID: 6410580101639474880}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6410580101639474886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 18.110752}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6410580101897148282}
@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 6410580101897148282}
   - component: {fileID: 6410580101897148281}
   - component: {fileID: 6410580101897148280}
+  - component: {fileID: 627503149483840052}
   m_Layer: 0
   m_Name: Resource_Water
   m_TagString: Untagged
@@ -108,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6410580101897148287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.64, y: -34.34, z: -18.110752}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6410580101639474887}
@@ -147,6 +148,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.27
+--- !u!95 &627503149483840052
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6410580101897148287}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77281693a92fd3642aa92dba0665c26b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &8975788003593507741
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +179,7 @@ GameObject:
   - component: {fileID: 3124186953149984193}
   - component: {fileID: 5564462707842001112}
   m_Layer: 0
-  m_Name: Resource-WaterSourceFish
+  m_Name: FishSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8975788003593507741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26, y: 0, z: 0}
+  m_LocalPosition: {x: 0.26, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6410580101897148282}
