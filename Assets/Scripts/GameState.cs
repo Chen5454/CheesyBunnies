@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 public class GameState : MonoBehaviour
 {
@@ -7,8 +9,10 @@ public class GameState : MonoBehaviour
 
 
 	[Header("Carrot Settings")]
-
+	//references
 	[SerializeField] private SpriteRenderer _carrotRenderer;
+	[SerializeField] private List<CarrotVisual> _carrotVisuals = new List<CarrotVisual>();
+	int currentVisualIndex;
 
 	[SerializeField] private int _currentPoints;//will effect somehow on the next root
 
@@ -33,6 +37,9 @@ public class GameState : MonoBehaviour
 			_instance = this;
 		else if (_instance != this)
 			Destroy(this.gameObject);
+
+		currentVisualIndex = 0;
+		UpdateCarrotVisuals(0);
 	}
 
 	private void Start()
@@ -40,6 +47,7 @@ public class GameState : MonoBehaviour
 		//init the start state
 		_gameCurrentState = GameStates.CarrotView;
 		EnterState(_gameCurrentState);
+		
 	}
 	private void Update()
 	{
@@ -172,7 +180,12 @@ public class GameState : MonoBehaviour
 	#region Root management
 	void InstantiateNewRoot()
 	{
-		RootMovement newRoot = Instantiate(_rootPF, _spawnPos.position, Quaternion.identity ,_parent).GetComponent<RootMovement>();
+	RootSpawn randomSpawn = GetRandomRootSpawn();
+		float startAngle = randomSpawn.SpawnDirection;
+		Vector2 spawnPos = randomSpawn.transform.position;
+
+		RootMovement newRoot = Instantiate(_rootPF, spawnPos, Quaternion.identity ,_parent).GetComponent<RootMovement>();
+		newRoot.SetInitialAngle(startAngle);
 		_currentRoot = newRoot;
 		_currentRoot.AddTotalLength(_currentPoints);
 		CameraController.Instance.SetNewRootCameraFollow(_currentRoot.transform);
@@ -186,15 +199,79 @@ public class GameState : MonoBehaviour
 	{
 		_hazardtouched++;
 	}
-
 	public void TouchedResource(int points)
 	{
 		_currentPoints += points;
+
+		CheckIfNeedToChangeCarrotVisual();
+	}
+	void CheckIfNeedToChangeCarrotVisual()
+	{
+		int newIndex = currentVisualIndex;
+		for (int i = currentVisualIndex; i < _carrotVisuals.Count; i++)
+		{
+			if(_currentPoints >= _carrotVisuals[i].PointsRequired)
+			{
+				newIndex = i;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		if(newIndex != currentVisualIndex)
+		{
+			//change visuals
+			UpdateCarrotVisuals(newIndex);
+		}
+
+	}
+	void UpdateCarrotVisuals(int index)
+	{
+		
+		
+		if(_carrotRenderer != null)
+		{
+			currentVisualIndex = index;
+			_carrotRenderer.sprite = _carrotVisuals[currentVisualIndex].CarrotSprite;
+		}
+		else
+		{
+			//debug
+			_carrotVisuals[currentVisualIndex].TestCarrotGO.SetActive(false);
+			currentVisualIndex = index;
+			_carrotVisuals[currentVisualIndex].TestCarrotGO.SetActive(true);
+		}
 	}
 
+	RootSpawn GetRandomRootSpawn() => _carrotVisuals[currentVisualIndex].GetRandomSpawnTrans();
 	#endregion
 
 }
+[Serializable]
+public class CarrotVisual
+{
+	[SerializeField] private Sprite _carrotSprite;
+	public Sprite CarrotSprite => _carrotSprite;
+
+	[SerializeField] private int _pointsRequired;
+	public int PointsRequired => _pointsRequired;
+
+	//debug
+	[SerializeField] private GameObject _testCarrotGO;
+	public GameObject TestCarrotGO => _testCarrotGO;
+
+	[SerializeField] private List<RootSpawn> _spawnList = new List<RootSpawn>();
+	public List<RootSpawn> SpawnList => _spawnList;
+
+	public RootSpawn GetRandomSpawnTrans()
+	{
+		int randomIndex = UnityEngine.Random.Range(0, _spawnList.Count);
+		return _spawnList[randomIndex];
+	}
+}
+
 
 public enum GameStates
 {

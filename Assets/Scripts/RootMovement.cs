@@ -15,7 +15,7 @@ public class RootMovement : MonoBehaviour
     public bool isAtStartPoint;
     public float maxLength;
     public CameraFollow CameraFollow;
-    private float totalLength = 0f;
+    [SerializeField]private float totalLength = 0f;//serialized for debug
     [SerializeField] Text totalTxt;
     private void Start()
     {
@@ -65,5 +65,8 @@ public class RootMovement : MonoBehaviour
         if(totalTxt != null)
         totalTxt.text = Convert.ToInt32(totalLength).ToString();
     }
-	public void AddTotalLength(int length) => totalLength += (length + maxLength);
+	public void AddTotalLength(float length) => totalLength += (length + maxLength);
+	public void AddLength(float length) => totalLength += length;
+	public void SetInitialDirection(Vector2 dir) => direction = dir;
+	public void SetInitialAngle(float newAngle) =>  angle = newAngle * Mathf.Deg2Rad;
 }

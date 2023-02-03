@@ -162,8 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   isAtStartPoint: 0
-  maxLength: 50
+  maxLength: 20
   CameraFollow: {fileID: 0}
+  totalLength: 0
   totalTxt: {fileID: 0}
 --- !u!50 &6865189962042975315
 Rigidbody2D:
