@@ -62,6 +62,7 @@ public class RootMovement : MonoBehaviour
             enabled= false;
             GameState.Instance.ChangeGameState(GameStates.CarrotView);
         }
+        if(totalTxt != null)
         totalTxt.text = Convert.ToInt32(totalLength).ToString();
     }
 }

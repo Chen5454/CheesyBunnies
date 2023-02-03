@@ -1,21 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PortalManager : MonoBehaviour
 {
+    public DimensionsType dimensionsType;
+    public DimensionsType previousGameType;
+    public DimensionLayer previousGamesLayer;
+
+    private void Update()
+    {
+        previousGamesLayer = DimensionLayersManager.Instance.currentDimenstion;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-   
         if (other.CompareTag("Root"))
         {
             Debug.Log("Root Detected");
 
-            DimensionsType[] dimensions = (DimensionsType[])System.Enum.GetValues(typeof(DimensionsType));
-            int randomIndex = UnityEngine.Random.Range(0, dimensions.Length);
-            DimensionsType randomDimension = dimensions[randomIndex];
-            DimensionLayersManager.Instance.ChangeDimension(randomDimension);
+
+            DimensionLayersManager.Instance.ChangeDimension(dimensionsType);
+
+            previousGameType = previousGamesLayer.GetDimensionType;
+
+            DimensionsType temp = dimensionsType;
+            dimensionsType = previousGameType;
+            previousGameType = temp;
         }
     }
 }
