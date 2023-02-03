@@ -149,6 +149,7 @@ MonoBehaviour:
   CameraFollow: {fileID: 0}
   totalLength: 0
   totalTxt: {fileID: 0}
+  RootFillImage: {fileID: 0}
   tipTrans: {fileID: 858966163761967409}
 --- !u!50 &6865189962042975315
 Rigidbody2D:

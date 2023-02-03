@@ -1,20 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEditor.Build.Content;
 
 public class GameState : MonoBehaviour
 {
 	private static GameState _instance;
 	public static GameState Instance => _instance;
+    public Toggle invertToggle;
 
 
-	[Header("Carrot Settings")]
+    [Header("Carrot Settings")]
 	//references
 	[SerializeField] private SpriteRenderer _carrotRenderer;
 	[SerializeField] private List<CarrotVisual> _carrotVisuals = new List<CarrotVisual>();
 	int currentVisualIndex;
+    [SerializeField]public Image RootFillImage;
 
-	[SerializeField] private int _currentPoints;//will effect somehow on the next root
+    [SerializeField] private int _currentPoints;//will effect somehow on the next root
 
 	[SerializeField] private int _hazardtouched;
 
@@ -22,12 +27,11 @@ public class GameState : MonoBehaviour
 	[SerializeField] private GameStates _gameCurrentState;
 	bool _isPausing;
 
-
 	[Header("Root Spawn")]
 	[SerializeField] private GameObject _rootPF;
 	[SerializeField] private Transform _spawnPos;
 	[SerializeField] private Transform _parent;
-
+	[SerializeField] private GameObject SettingsMenu;
 	//serialized for debugging
 	[SerializeField] private RootMovement _currentRoot;
 
@@ -47,8 +51,7 @@ public class GameState : MonoBehaviour
 		//init the start state
 		_gameCurrentState = GameStates.CarrotView;
 		EnterState(_gameCurrentState);
-		
-	}
+    }
 	private void Update()
 	{
 		if (_gameCurrentState == GameStates.CarrotView)
@@ -141,23 +144,40 @@ public class GameState : MonoBehaviour
 		
 	}
 	#endregion
-	#region Pause menu
+	#region  menus
 	void EnterPauseMenu()
 	{
-		Time.timeScale = 0;
+        SettingsMenu.SetActive(true);
+
+        Time.timeScale = 0;
 		//making root stop moving
 	}
-	void ExitPauseMenu()
+	public void ExitPauseMenu()
 	{
-		Time.timeScale = 1f;
 
+        Time.timeScale = 1f;
 
-		//if at root view
-		//making root to continue moving
-	}
+        //if at root view
+        //making root to continue moving
+    }
+	public void MainMenuButton()
+	{
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+    }
+	public void SettinInvertSetting()
+	{
+        if (invertToggle.isOn)
+        {
+         UIManager.Instance.isInvert = true;
 
+        }
+        else
+        {
+            UIManager.Instance.isInvert = false;
 
-	void PauseMenuHandle()
+        }
+    }
+    void PauseMenuHandle()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
