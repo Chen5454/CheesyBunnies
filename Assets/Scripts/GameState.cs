@@ -25,7 +25,7 @@ public class GameState : MonoBehaviour
 
 	[Header("Game State")]
 	[SerializeField] private GameStates _gameCurrentState;
-	bool _isPausing;
+	public bool _isPausing;
 
 	[Header("Root Spawn")]
 	[SerializeField] private GameObject _rootPF;
@@ -156,7 +156,7 @@ public class GameState : MonoBehaviour
 	{
 
         Time.timeScale = 1f;
-
+		_isPausing = false;
         //if at root view
         //making root to continue moving
     }
