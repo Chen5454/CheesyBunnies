@@ -21,7 +21,7 @@ public class DimensionLayersManager : MonoBehaviour
 			Destroy(this.gameObject);
 
 		_previousDimension = _dimensionLayers[0];
-	}
+	}	
 
 	private void Update()
 	{
