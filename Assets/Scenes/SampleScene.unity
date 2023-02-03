@@ -363,7 +363,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a87866e5d67963947beff3b1d0f0ffc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -384,9 +384,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -395,13 +393,31 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0.29142952
+        inSlope: 2.5023746
+        outSlope: 2.5023746
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
+        outWeight: 0.13036668
+      - serializedVersion: 3
+        time: 0.5176854
+        value: 0.7242273
+        inSlope: 0.9339186
+        outSlope: 0.9339186
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.27789792
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.025014073
+        inSlope: -1.8171091
+        outSlope: -1.8171091
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.10133064
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -437,7 +453,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
