@@ -10,14 +10,26 @@ public class RootSpawn : MonoBehaviour
 
 	[SerializeField] private GameObject _topPF;
 
-	private GameObject _top;
+	[SerializeField]private GameObject _top;
+
+	private void Awake()
+	{
+		if(_top != null)
+		{
+			_top.SetActive(false);
+		}
+	}
 
 	public void OnSpawnNewObject(float angle)
 	{
 		if (_top == null)
 		{
-
 			_top = Instantiate(_topPF, this.transform);
+			_top.transform.rotation = Quaternion.Euler(0, 0, angle - 180f);
+		}
+		else
+		{
+			_top.SetActive(true);
 			_top.transform.rotation = Quaternion.Euler(0, 0, angle - 180f);
 		}
 	}

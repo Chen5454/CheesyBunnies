@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   isAtStartPoint: 0
-  maxLength: 20
+  maxLength: 30
   CameraFollow: {fileID: 0}
   totalLength: 0
   totalTxt: {fileID: 0}
