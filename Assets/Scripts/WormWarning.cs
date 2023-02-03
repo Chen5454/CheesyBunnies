@@ -13,7 +13,8 @@ public class WormWarning : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.name);
-        WormScript.DetectItem();
+        if(collision.name!="Root")
+            WormScript.DetectItem();
     }
 
 }
