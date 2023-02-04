@@ -11,7 +11,7 @@ public class GameState : MonoBehaviour
     public Toggle invertToggle;
     public bool isInvert;
     public float scaleFactor = 1.1f;
-
+	public GameObject FillSprite;
     public GameObject PlayButton;
 	[Header("Carrot Settings")]
 	//references
@@ -55,6 +55,7 @@ public class GameState : MonoBehaviour
 		//init the start state
 		_gameCurrentState = GameStates.CarrotView;
 		EnterState(_gameCurrentState);
+        FillSprite.SetActive(false);
     }
 	private void Update()
 	{
