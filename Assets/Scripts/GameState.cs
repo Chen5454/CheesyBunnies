@@ -298,7 +298,7 @@ public class GameState : MonoBehaviour
 		}
 	}
 
-	RootSpawn GetRandomRootSpawn() => _carrotVisuals[currentVisualIndex].GetRandomSpawnTrans();
+	RootSpawn GetRandomRootSpawn() => _carrotVisuals[currentVisualIndex].GetSpawnPos();
 	#endregion
 
 }
@@ -318,9 +318,16 @@ public class CarrotVisual
 	[SerializeField] private List<RootSpawn> _spawnList = new List<RootSpawn>();
 	public List<RootSpawn> SpawnList => _spawnList;
 
-	public RootSpawn GetRandomSpawnTrans()
+	int index = 0;
+
+	public RootSpawn GetSpawnPos()
 	{
-		int randomIndex = UnityEngine.Random.Range(0, _spawnList.Count);
+		int randomIndex = index;
+
+		index++;
+		if (index > _spawnList.Count - 1)
+			index = 0;
+
 		return _spawnList[randomIndex];
 	}
 }
