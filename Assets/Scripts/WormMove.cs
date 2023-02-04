@@ -36,7 +36,7 @@ public class WormMove : MonoBehaviour
         worm_positions[0] = trail_positions[0] = trail_positions[size] = trail_positions[size*2] = transform.position;
         for (int i = 1; i < size; i++)
         {
-            worm_positions[i] = worm_positions[i - 1] + Vector3.right;
+            worm_positions[i] = worm_positions[i - 1] + transform.right;
             trail_positions[i] = trail_positions[size*2 + i] = trail_positions[size + i] = worm_positions[0];
             GameObject collider = Instantiate(wormColliderPrefab, worm_positions[i], Quaternion.identity, transform);
             collider.transform.localScale = Vector3.one * 0.5f;//lineRenderer.widthCurve.
@@ -45,6 +45,7 @@ public class WormMove : MonoBehaviour
         lineRenderer.SetPositions(worm_positions);
         trailRenderer.SetPositions(trail_positions);
 
+        AudioManager.Instance.PlayAudio(AudioManager.Instance.WormDig,true,false);
     }
 
     float regular_movement()
