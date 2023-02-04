@@ -29,7 +29,7 @@ public class GameState : MonoBehaviour
 	[Header("Game State")]
 	[SerializeField] private GameStates _gameCurrentState;
 	public bool _isPausing;
-
+	private bool _canMove;
 	[Header("Root Spawn")]
 	[SerializeField] private GameObject _rootPF;
 	[SerializeField] private Transform _spawnPos;
@@ -63,8 +63,12 @@ public class GameState : MonoBehaviour
 			//can push on down button to change to root view
 			if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
 			{
-				ChangeGameState(GameStates.RootView);
-				InstantiateNewRoot();
+				if (_canMove)
+				{
+                    ChangeGameState(GameStates.RootView);
+                    InstantiateNewRoot();
+                }
+				
 			}
 
 
@@ -152,7 +156,7 @@ public class GameState : MonoBehaviour
     public void EnterPauseMenu()
 	{
         SettingsMenu.SetActive(true);
-
+		_canMove = false;
         Time.timeScale = 0;
 		//making root stop moving
 	}
@@ -161,6 +165,7 @@ public class GameState : MonoBehaviour
 
         Time.timeScale = 1f;
 		_isPausing = false;
+		_canMove = true;
         //if at root view
         //making root to continue moving
     }
@@ -173,6 +178,7 @@ public class GameState : MonoBehaviour
 	public void StartGame()
 	{
         Time.timeScale = 1;
+		_canMove = true;
 
     }
     public void MainMenuButton()
