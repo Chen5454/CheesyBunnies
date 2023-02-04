@@ -37,7 +37,6 @@ public class RootSpawn : MonoBehaviour
 			_top.SetActive(true);
 			_top.transform.rotation = Quaternion.Euler(0, 0, angle - 180f);
 		}
-		Debug.Log("Z rotation" + transform.rotation.eulerAngles.z);
 	}
 
 	private void OnDrawGizmos()
