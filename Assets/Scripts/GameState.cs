@@ -13,8 +13,9 @@ public class GameState : MonoBehaviour
 	public static GameState Instance => _instance;
     public Toggle invertToggle;
     public bool isInvert;
+    public float scaleFactor = 1.1f;
 
-	public GameObject PlayButton;
+    public GameObject PlayButton;
     [Header("Carrot Settings")]
 	//references
 	[SerializeField] private SpriteRenderer _carrotRenderer;
@@ -37,6 +38,7 @@ public class GameState : MonoBehaviour
 	[SerializeField] private GameObject SettingsMenu;
 	//serialized for debugging
 	[SerializeField] private RootMovement _currentRoot;
+	[SerializeField] private Transform ImageFiller;
 
 
     private void Awake()
@@ -245,8 +247,17 @@ public class GameState : MonoBehaviour
 	{
 		_currentPoints += points;
 
-		CheckIfNeedToChangeCarrotVisual();
-	}
+        CheckIfNeedToChangeCarrotVisual();
+		UpdateFillImage();
+
+    }
+	public void UpdateFillImage()
+	{
+        Vector3 newScale = ImageFiller.localScale;
+        newScale.y *= scaleFactor;
+        ImageFiller.localScale = newScale;
+    }
+
 	void CheckIfNeedToChangeCarrotVisual()
 	{
 		int newIndex = currentVisualIndex;
