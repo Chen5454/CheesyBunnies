@@ -45,6 +45,7 @@ public class WormMove : MonoBehaviour
         lineRenderer.SetPositions(worm_positions);
         trailRenderer.SetPositions(trail_positions);
 
+        AudioManager.Instance.PlayAudio(AudioManager.Instance.WormDig,true,false);
     }
 
     float regular_movement()
