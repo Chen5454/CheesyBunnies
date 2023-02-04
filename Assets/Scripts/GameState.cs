@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEditor.Build.Content;
-using System.Threading;
-using UnityEditor.SearchService;
 
 public class GameState : MonoBehaviour
 {
