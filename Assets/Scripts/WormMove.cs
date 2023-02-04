@@ -17,6 +17,8 @@ public class WormMove : MonoBehaviour
     private float turnDetected = 0;
     private float timer = 0;
 
+	[SerializeField] private Transform _wormButt;
+
     private void Start()
     {
         // Recieve header distance from header object.
@@ -65,9 +67,26 @@ public class WormMove : MonoBehaviour
             timer -= Time.deltaTime;
             Detected = !(timer <= 0);
         }
-    }
 
-    public void DetectItem()
+		if (_wormButt != null)
+		{
+			//Vector2 dir = GetBeforeLastLineRendererPos() - GetLastLineRendererPos();
+			//float angle = Vector2.Angle(dir, Vector2.right);
+			//_wormButt.position = GetLastLineRendererPos();
+			//_wormButt.rotation = Quaternion.Euler(0, 0, angle);
+			//Debug.Log("Butt angle: "+  angle);
+		}
+
+	}
+
+
+
+
+	Vector3 GetLastLineRendererPos() => lineRenderer.GetPosition(lineRenderer.positionCount - 1);
+	Vector3 GetBeforeLastLineRendererPos() => lineRenderer.GetPosition(lineRenderer.positionCount - 2);
+
+
+	public void DetectItem()
     {
         Detected = true;
         timer = detectHeader;
