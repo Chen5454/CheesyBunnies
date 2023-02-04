@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3380991456704818274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3380991456704818276}
+  - component: {fileID: 3380991456704818277}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3380991456704818276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380991456704818274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3380991456704818277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380991456704818274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0a79c7128c89c41b3e69f6033fac84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invertToggle: {fileID: 0}
+  isInvert: 0
+  scaleFactor: 1.1
+  PlayButton: {fileID: 0}
+  _carrotRenderer: {fileID: 0}
+  _carrotVisuals:
+  - _carrotSprite: {fileID: 0}
+    _pointsRequired: 0
+    _testCarrotGO: {fileID: 0}
+    _spawnList:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - _carrotSprite: {fileID: 0}
+    _pointsRequired: 15
+    _testCarrotGO: {fileID: 0}
+    _spawnList:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - _carrotSprite: {fileID: 0}
+    _pointsRequired: 30
+    _testCarrotGO: {fileID: 0}
+    _spawnList:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  RootFillImage: {fileID: 0}
+  StopPlaying: 0
+  _currentPoints: 0
+  _hazardtouched: 0
+  _gameCurrentState: 0
+  _isPausing: 0
+  _rootPF: {fileID: 6865189962042975326, guid: 550ad3e3331dfc4489b24e9fffc298bc, type: 3}
+  _spawnPos: {fileID: 0}
+  _parent: {fileID: 3380991456704818276}
+  SettingsMenu: {fileID: 0}
+  _currentRoot: {fileID: 0}
+  ImageFiller: {fileID: 0}

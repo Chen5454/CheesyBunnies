@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip digLoop;
     public AudioClip WormDig;
+    public AudioClip Buuble;
+    public AudioClip Acid;
 
 
     public AudioSource source;
