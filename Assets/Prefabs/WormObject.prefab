@@ -132,7 +132,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d00414962d043e94ea38c96d0564fa6b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,18 +153,16 @@ LineRenderer:
   m_SortingLayerID: 1625445417
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 1.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 0.73195875
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -173,7 +171,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16508448
-        value: 1
+        value: 0.8969078
         inSlope: -0
         outSlope: -0
         tangentMode: 0
@@ -181,7 +179,16 @@ LineRenderer:
         inWeight: 0.34969255
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
+        time: 0.64843357
+        value: 0.91036373
+        inSlope: 0.18227859
+        outSlope: 0.18227859
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.98721313
         value: 1
         inSlope: 0
         outSlope: 0
@@ -227,7 +234,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!1 &895929506
 GameObject:
