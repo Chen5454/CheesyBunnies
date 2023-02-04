@@ -38,7 +38,8 @@ public class GameState : MonoBehaviour
 	//serialized for debugging
 	[SerializeField] private RootMovement _currentRoot;
 
-	private void Awake()
+
+    private void Awake()
 	{
 		if (_instance == null)
 			_instance = this;
