@@ -44,6 +44,7 @@ public class WormMove : MonoBehaviour
         }
         lineRenderer.SetPositions(worm_positions);
         trailRenderer.SetPositions(trail_positions);
+
     }
 
     float regular_movement()

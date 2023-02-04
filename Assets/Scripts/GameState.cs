@@ -22,7 +22,7 @@ public class GameState : MonoBehaviour
 	[SerializeField] private List<CarrotVisual> _carrotVisuals = new List<CarrotVisual>();
 	int currentVisualIndex;
     [SerializeField]public Image RootFillImage;
-
+	public bool StopPlaying;
     [SerializeField] private int _currentPoints;//will effect somehow on the next root
 
 	[SerializeField] private int _hazardtouched;
