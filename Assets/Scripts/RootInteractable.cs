@@ -36,16 +36,24 @@ public class RootInteractable : MonoBehaviour
 			{
 				//destroys root or something
 				GameState.Instance.TouchedHazard();
-                _audioSource.clip = AudioManager.Instance.Acid;
-                _audioSource.Play();
+				if (_audioSource)
+				{
+                    _audioSource.clip = AudioManager.Instance.Acid;
+                    _audioSource.Play();
+                }
+         
             }
 			else
 			{
 				//gives points to the carrot or something
 				if (_canGiveNutrient)
 				{
-					_audioSource.clip = AudioManager.Instance.Buuble;
-					_audioSource.Play();
+                    if (_audioSource)
+                    {
+                        _audioSource.clip = AudioManager.Instance.Buuble;
+                        _audioSource.Play();
+                    }
+
                     _canGiveNutrient = false;
 					GameState.Instance.TouchedResource(_points);
 				}
