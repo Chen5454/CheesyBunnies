@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraFollow: {fileID: 0}
-  _points: 3
+  _points: 5
   _isHazard: 0
 --- !u!58 &6410580101897148280
 CircleCollider2D:
