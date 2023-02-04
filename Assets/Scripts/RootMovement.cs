@@ -14,29 +14,53 @@ public class RootMovement : MonoBehaviour
     public float speed;
     public bool isAtStartPoint;
     public float maxLength;
-    public CameraFollow CameraFollow;
-    private float totalLength = 0f;
+    //public CameraFollow CameraFollow;
+    [SerializeField] public float totalLength = 0f;//serialized for debug
     [SerializeField] Text totalTxt;
+    [SerializeField] public Image RootFillImage;
+	[SerializeField] private Transform tipTrans;
+	[SerializeField] private LineRenderer tunnelLine;
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        totalLength = maxLength;
+        RootFillImage = GameState.Instance.RootFillImage;
+        //totalLength = maxLength;
+        AudioManager.Instance.PlayAudio(AudioManager.Instance.digLoop,true,true);
     }
 
     private void Update()
     {
+
         float rotationSpeed = Input.GetAxis("Horizontal") * Time.deltaTime;
-        angle -= rotationSpeed;
+
+        if (GameState.Instance.isInvert)
+        {
+            angle -= rotationSpeed;
+
+        }
+        else
+        {
+            angle += rotationSpeed;
+
+        }
+
         direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 
         lineRenderer.SetVertexCount(++numberOfPoints);
         lineRenderer.SetPosition(numberOfPoints - 1, transform.position);
 
-        Vector3 lastPosition = transform.position;
+		tunnelLine.SetVertexCount(numberOfPoints);
+		tunnelLine.SetPosition(numberOfPoints - 1, transform.position);
+
+		Vector3 lastPosition = transform.position;
         transform.position += direction * Time.deltaTime * speed;
         totalLength -= Vector3.Distance(lastPosition, transform.position);
 
-        float threshold = 0.1f;
+		tipTrans.rotation = Quaternion.Euler(0,0,(angle * Mathf.Rad2Deg) - 180);
+
+
+
+		float threshold = 0.1f;
         if (Vector3.Distance(transform.position, lineRenderer.GetPosition(0)) < threshold)
         {
             isAtStartPoint = true;
@@ -49,7 +73,7 @@ public class RootMovement : MonoBehaviour
         {
             isAtStartPoint = true;
 
-            CameraFollow.StartFollowingLine();
+          //  CameraFollow.StartFollowingLine();
         }
         else
         {
@@ -60,9 +84,25 @@ public class RootMovement : MonoBehaviour
             direction = -direction;
             totalLength = maxLength;
             enabled= false;
-            GameState.Instance.ChangeGameState(GameStates.CarrotView);
+            AudioManager.Instance.StopAudio(AudioManager.Instance.digLoop);
+
+            if (GameState.Instance)
+            {
+
+                GameState.Instance.ChangeGameState(GameStates.CarrotView);
+
+            }
         }
         if(totalTxt != null)
         totalTxt.text = Convert.ToInt32(totalLength).ToString();
+
+        RootFillImage.fillAmount= totalLength/maxLength;
     }
+
+
+
+	public void AddTotalLength(float length) => totalLength += (length + maxLength);
+	public void AddLength(float length) => totalLength += length;
+	public void SetInitialDirection(Vector2 dir) => direction = dir;
+	public void SetInitialAngle(float newAngle) =>  angle = newAngle * Mathf.Deg2Rad;
 }

@@ -34,11 +34,14 @@ public class CameraController : MonoBehaviour
 			ChangeCamera(1);
 		}
 	}
-	/// <summary>
-	/// 0 = carrot camera, 1 = root camera
-	/// </summary>
-	/// <param name="index"></param>
-	public void ChangeCamera(int index)
+
+
+
+    /// <summary>
+    /// 0 = carrot camera, 1 = root camera
+    /// </summary>
+    /// <param name="index"></param>
+    public void ChangeCamera(int index)
 	{
 		cameraCurrentIndex = index;
 		for (int i = 0; i < _virtualCameraList.Count; i++)
@@ -46,5 +49,8 @@ public class CameraController : MonoBehaviour
 			_virtualCameraList[i].Priority = i == index ? 1 : 0;
 		}
 	}
-
+	public void SetNewRootCameraFollow(Transform newRootTrans)
+	{
+		_virtualCameraList[1].Follow = newRootTrans;
+	}
 }
