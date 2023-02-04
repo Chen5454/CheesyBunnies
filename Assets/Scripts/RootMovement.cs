@@ -21,6 +21,7 @@ public class RootMovement : MonoBehaviour
     
 
 	[SerializeField] private Transform tipTrans;
+	[SerializeField] private LineRenderer tunnelLine;
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -48,7 +49,10 @@ public class RootMovement : MonoBehaviour
         lineRenderer.SetVertexCount(++numberOfPoints);
         lineRenderer.SetPosition(numberOfPoints - 1, transform.position);
 
-        Vector3 lastPosition = transform.position;
+		tunnelLine.SetVertexCount(numberOfPoints);
+		tunnelLine.SetPosition(numberOfPoints - 1, transform.position);
+
+		Vector3 lastPosition = transform.position;
         transform.position += direction * Time.deltaTime * speed;
         totalLength -= Vector3.Distance(lastPosition, transform.position);
 
