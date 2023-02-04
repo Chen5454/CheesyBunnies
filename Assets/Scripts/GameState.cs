@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEditor.Build.Content;
-using System.Threading;
-using UnityEditor.SearchService;
 
 public class GameState : MonoBehaviour
 {
@@ -16,8 +13,9 @@ public class GameState : MonoBehaviour
     public float scaleFactor = 1.1f;
 
     public GameObject PlayButton;
-    [Header("Carrot Settings")]
+	[Header("Carrot Settings")]
 	//references
+	[SerializeField] private CarrotAnimation _carrotAnimation;
 	[SerializeField] private SpriteRenderer _carrotRenderer;
 	[SerializeField] private List<CarrotVisual> _carrotVisuals = new List<CarrotVisual>();
 	int currentVisualIndex;
@@ -273,12 +271,9 @@ public class GameState : MonoBehaviour
 			}
 		}
 
-		if(newIndex != currentVisualIndex)
-		{
+		
 			//change visuals
 			UpdateCarrotVisuals(newIndex);
-		}
-
 	}
 	void UpdateCarrotVisuals(int index)
 	{
@@ -292,13 +287,23 @@ public class GameState : MonoBehaviour
 		else
 		{
 			//debug
-			_carrotVisuals[currentVisualIndex].TestCarrotGO.SetActive(false);
-			currentVisualIndex = index;
-			_carrotVisuals[currentVisualIndex].TestCarrotGO.SetActive(true);
+			if (currentVisualIndex == index)
+			{
+			 StartCoroutine(_carrotAnimation.UpdateAnimator(currentVisualIndex,
+			 _carrotVisuals[currentVisualIndex].GetBodyIndex(_currentPoints)));
+			}
+			else
+			{
+				//_carrotVisuals[currentVisualIndex].TestCarrotGO.SetActive(false);
+				currentVisualIndex = index;
+				//_carrotVisuals[currentVisualIndex].TestCarrotGO.SetActive(true);
+				StartCoroutine(_carrotAnimation.UpdateAnimator(currentVisualIndex,
+			_carrotVisuals[currentVisualIndex].GetBodyIndex(_currentPoints)));
+			}
 		}
 	}
 
-	RootSpawn GetRandomRootSpawn() => _carrotVisuals[currentVisualIndex].GetRandomSpawnTrans();
+	RootSpawn GetRandomRootSpawn() => _carrotVisuals[currentVisualIndex].GetSpawnPos();
 	#endregion
 
 }
@@ -311,6 +316,27 @@ public class CarrotVisual
 	[SerializeField] private int _pointsRequired;
 	public int PointsRequired => _pointsRequired;
 
+	/// <summary>
+	/// points related to this current visual to make it bigger or not
+	/// </summary>
+	[SerializeField] private List<int> _points;
+	public List<int> GetPointsList => _points;
+
+	[SerializeField] private int bodyStateIndex;
+
+	public int GetBodyIndex(int score) 
+	{
+		int bodyIndex = 0;
+		for (int i = 0; i < _points.Count; i++)
+		{
+			if(score >= _points[i])
+			{
+				bodyIndex = i;
+			}
+		}
+		return bodyIndex;
+	}
+
 	//debug
 	[SerializeField] private GameObject _testCarrotGO;
 	public GameObject TestCarrotGO => _testCarrotGO;
@@ -318,9 +344,16 @@ public class CarrotVisual
 	[SerializeField] private List<RootSpawn> _spawnList = new List<RootSpawn>();
 	public List<RootSpawn> SpawnList => _spawnList;
 
-	public RootSpawn GetRandomSpawnTrans()
+	int index = 0;
+
+	public RootSpawn GetSpawnPos()
 	{
-		int randomIndex = UnityEngine.Random.Range(0, _spawnList.Count);
+		int randomIndex = index;
+
+		index++;
+		if (index > _spawnList.Count - 1)
+			index = 0;
+
 		return _spawnList[randomIndex];
 	}
 }
