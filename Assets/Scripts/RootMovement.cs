@@ -18,18 +18,18 @@ public class RootMovement : MonoBehaviour
     [SerializeField] public float totalLength = 0f;//serialized for debug
     [SerializeField] Text totalTxt;
     [SerializeField] public Image RootFillImage;
-    
-
 	[SerializeField] private Transform tipTrans;
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         RootFillImage = GameState.Instance.RootFillImage;
         //totalLength = maxLength;
+        AudioManager.Instance.PlayAudio(AudioManager.Instance.digLoop,true,true);
     }
 
     private void Update()
     {
+
         float rotationSpeed = Input.GetAxis("Horizontal") * Time.deltaTime;
 
         if (GameState.Instance.isInvert)
@@ -80,9 +80,13 @@ public class RootMovement : MonoBehaviour
             direction = -direction;
             totalLength = maxLength;
             enabled= false;
+            AudioManager.Instance.StopAudio(AudioManager.Instance.digLoop);
+
             if (GameState.Instance)
             {
+
                 GameState.Instance.ChangeGameState(GameStates.CarrotView);
+
             }
         }
         if(totalTxt != null)
@@ -90,6 +94,9 @@ public class RootMovement : MonoBehaviour
 
         RootFillImage.fillAmount= totalLength/maxLength;
     }
+
+
+
 	public void AddTotalLength(float length) => totalLength += (length + maxLength);
 	public void AddLength(float length) => totalLength += length;
 	public void SetInitialDirection(Vector2 dir) => direction = dir;

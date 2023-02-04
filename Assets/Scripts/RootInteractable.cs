@@ -26,6 +26,7 @@ public class RootInteractable : MonoBehaviour
             _rootMovement = _root.GetComponent<RootMovement>();
 			_rootMovement.RootFillImage.fillAmount = 1;
             _rootMovement.enabled = false;
+            AudioManager.Instance.StopAudio(AudioManager.Instance.digLoop);
 
             //  CameraFollow.FollowLineReverse();
 
