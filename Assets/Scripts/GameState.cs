@@ -228,6 +228,10 @@ public class GameState : MonoBehaviour
 		Vector2 spawnPos = randomSpawn.transform.position;
 
 		randomSpawn.OnSpawnNewObject(startAngle);
+		if (_currentRoot)
+		{
+			Destroy(_currentRoot.gameObject.transform.GetChild(0).GetChild(0).gameObject);
+		}
 		RootMovement newRoot = Instantiate(_rootPF, spawnPos, Quaternion.identity ,_parent).GetComponent<RootMovement>();
 		newRoot.SetInitialAngle(startAngle);
 		_currentRoot = newRoot;

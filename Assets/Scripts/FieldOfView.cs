@@ -10,6 +10,8 @@ public class FieldOfView : MonoBehaviour
     int raycount = 60;
     float angle = 0, start_angle=0;
     public float viewDistance = 20f;
+    public Sprite BG1, BG2;
+    public int doorsAmount = 0;
 
     Vector3[] vertices;
     Vector2[] uv;
@@ -34,7 +36,11 @@ public class FieldOfView : MonoBehaviour
     }
     private void Update()
     {
-        Vector3[] path = inside ? Inside() : create_one_mesh();
+        Vector3[] path;
+        if (inside)
+            path = Inside();
+        else
+            path = create_one_mesh();
         Vector2[] path2D = new Vector2[path.Length];
         for (int i = 0; i < path2D.Length; i++)
             path2D[i] = new Vector2(path[i].x, path[i].y);
@@ -51,6 +57,11 @@ public class FieldOfView : MonoBehaviour
     }
     private Vector3[] create_one_mesh()
     {
+        if (transform.parent.GetComponent<FieldOfView>().doorsAmount == 0)
+        {
+            GetComponent<MeshFilter>().mesh = null;
+            return new Vector3[0];
+        }
         Mesh[] meshFilters = Outside();
         if (meshFilters.Length == 1)
         {
@@ -83,6 +94,7 @@ public class FieldOfView : MonoBehaviour
         vertices[0] = origin;
         int vertexIndex = 1;
         int tringleIndex = 0;
+        doorsAmount = 0;
 
         for (int i = 0; i <= raycount; i++)
         {
@@ -91,7 +103,10 @@ public class FieldOfView : MonoBehaviour
             if (hit.collider == null || hit.collider.tag != "Portal")
                 vertex = origin + GetVector3FromAngle(angle) * viewDistance;
             else
-                vertex = hit.point - new Vector2(transform.position.x,transform.position.y);//transform.InverseTransformPoint(hit.point);
+            {
+                vertex = hit.point - new Vector2(transform.position.x, transform.position.y);//transform.InverseTransformPoint(hit.point);
+                doorsAmount++;
+            }
             
             vertices[vertexIndex] = vertex;
 
@@ -265,31 +280,42 @@ public class FieldOfView : MonoBehaviour
             return;
         }
 
-        if (inside||collision.gameObject.layer == gameObject.layer) return;
-        collision.GetComponent<SpriteRenderer>().enabled =false;
+        if (inside||collision.gameObject.layer == gameObject.layer || (collision.tag == "Root") || (collision.tag == "FOV")) return;
+				
+        if(collision.transform.childCount>0)
+            collision.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled =false;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Portal" && inside && timer_out==0
-            && Vector3.Distance(transform.position,collision.transform.position)<4) {
-            timer_out = 2.5f;
-            SwitchLayers(gameObject.layer);
+        if (collision.gameObject.tag == "Portal" && inside) {
+            //SwitchLayers(gameObject.layer);
             return; }
-        if (collision.gameObject.layer == gameObject.layer ||(collision.tag == "FOV")) return;
-        collision.GetComponent<SpriteRenderer>().enabled = true;
+        if (collision.gameObject.layer == gameObject.layer ||(collision.tag == "FOV")|| (collision.tag == "Root")) return;
+        if (collision.transform.childCount > 0)
+            collision.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
     }
-    private void SwitchLayers(int layer)
+    public void SwitchLayers()
     {
+        int layer = gameObject.layer ;
+        timer_out = 2.5f;
+        Sprite sprite;
+
+        //NEED TO BE CALLED WHEN ROOT ENTER TELEPORT
         Debug.Log("switching layers");
         if (LayerMask.NameToLayer("Level1") == layer)
         {
             gameObject.layer = LayerMask.NameToLayer("Level2");
             gameObject.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Level1");
+            sprite = BG2;
         }
         else
         {
             gameObject.layer = LayerMask.NameToLayer("Level1");
             gameObject.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Level2");
+            sprite = BG1;
         }
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag("Background"))
+            item.GetComponent<SpriteRenderer>().sprite = sprite;
+
     }
 }

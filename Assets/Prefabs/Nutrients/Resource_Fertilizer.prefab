@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6515987026719166653}
   - component: {fileID: 6515987026719166654}
   - component: {fileID: 6515987026719166655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Resource_Fertilizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
