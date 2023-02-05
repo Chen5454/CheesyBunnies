@@ -12,10 +12,11 @@ public class WormWarning : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
-        if(collision.name!="Root")
+        if (collision.name != "Root" && collision.tag != "FOV")
+        {
+            Debug.Log(collision.name);
             WormScript.DetectItem();
-        WormScript.DetectItem();
+        }
     }
 
 }

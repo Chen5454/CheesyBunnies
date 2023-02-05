@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6965564320822344548}
   - component: {fileID: 6965564320822344547}
   - component: {fileID: 6965564320822344546}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hazard_SandNBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

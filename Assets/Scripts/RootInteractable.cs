@@ -24,6 +24,12 @@ public class RootInteractable : MonoBehaviour
     {
         if (other.CompareTag("Root"))
         {
+            if (tag == "Portal")
+            {
+                Debug.Log("Exit Portal");
+                other.GetComponent<FieldOfView>().SwitchLayers();
+                return;
+            }
             _root = other.gameObject;
             _rootMovement = _root.GetComponent<RootMovement>();
 			_rootMovement.RootFillImage.fillAmount = 1;
@@ -54,8 +60,28 @@ public class RootInteractable : MonoBehaviour
             GameState.Instance.ChangeGameState(GameStates.CarrotView);
 
 		}
+		else if (other.CompareTag("FOV") && tag!="Portal")
+        {
+			if (other.gameObject.layer != gameObject.layer)
+            {
+                if (transform.childCount > 0)
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
+       
     }
-
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("FOV") && tag != "Portal")
+        {
+            if (other.gameObject.layer != gameObject.layer)
+            {
+                if (transform.childCount > 0)
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        
+    }
 
 
 }
